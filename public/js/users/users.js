@@ -41,7 +41,7 @@ $(document).on('click', '.edit-btn', function () {
         if (response.data) {
             $('#editUserModal #name').val(response.data.name);
             $('#editUserModal #userId').val(response.data.id);
-            $('#editUserModal #email').val(response.data.email);
+            $('#editUserModal #ID').val(response.data.ID || response.data.email || '');
             $('#editUserModal #password').val('');
             $('#editUserModal #role').val(response.data.role);
             $('#editUserModal #status').val(response.data.status);
@@ -132,7 +132,7 @@ $(document).ready(function () {
         { data: 'row_number' },
         { data: 'id', visible: false },
         { data: 'name' },
-        { data: 'email' },
+        { data: 'ID' },
         { data: 'role' },
         { data: 'status' },
         { data: 'phone' },

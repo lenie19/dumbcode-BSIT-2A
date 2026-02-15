@@ -38,7 +38,7 @@
                     <th>No.</th>
                     <th style="display:none;">id</th>
                     <th>Name</th>
-                    <th>Email</th>
+                    <th>ID</th>
                     <th>Role</th>
                     <th>Status</th>
                     <th>Phone</th>
@@ -73,8 +73,8 @@
               </div>
 
               <div class="form-group">
-                <label>Email</label>
-                <input type="email" name="email" class="form-control" required />
+                <label>ID</label>
+                <input type="text" name="ID" class="form-control" required />
               </div>
               <div class="form-group">
                 <label>Password</label>
@@ -140,8 +140,8 @@
               </div>
 
             <div class="form-group">
-              <label for="email">Email</label>
-              <input type="email" class="form-control" id="email" name="email" required>
+              <label for="ID">ID</label>
+              <input type="text" class="form-control" id="ID" name="ID" required>
             </div>
 
             <div class="form-group">

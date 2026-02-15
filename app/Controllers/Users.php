@@ -16,28 +16,28 @@ class Users extends Controller
 
     public function save(){
         $name = $this->request->getPost('name');
-        $email = $this->request->getPost('email');
+        $ID = $this->request->getPost('ID');
         $password = $this->request->getPost('password');
         $role = $this->request->getPost('role');
         $status = $this->request->getPost('status');
         $phone = $this->request->getPost('phone');
 
-        if (!$email || !$password) {
-            return $this->response->setJSON(['status' => 'error', 'message' => 'Email and password are required']);
+        if (!$ID || !$password) {
+            return $this->response->setJSON(['status' => 'error', 'message' => 'ID and password are required']);
         }
 
         $userModel = new \App\Models\UserModel();
         $logModel = new LogModel();
 
         // Check if email already exists
-        $existingUser = $userModel->where('email', $email)->first();
+        $existingUser = $userModel->where('ID', $ID)->first();
         if ($existingUser) {
-            return $this->response->setJSON(['status' => 'error', 'message' => 'Email is already in use']);
+            return $this->response->setJSON(['status' => 'error', 'message' => 'ID is already in use']);
         }
 
         $data = [
             'name'       => $name,
-            'email'      => $email,
+            'ID'      => $ID,
             'password'   => password_hash($password, PASSWORD_DEFAULT),
             'role'       => $role,
             'status'     => $status,
@@ -59,32 +59,32 @@ class Users extends Controller
         $logModel = new LogModel();
         $userId = $this->request->getPost('id');
         $name = $this->request->getPost('name');
-        $email = $this->request->getPost('email');
+        $ID = $this->request->getPost('ID');
         $password = $this->request->getPost('password');
         $role = $this->request->getPost('role');
         $status = $this->request->getPost('status');
         $phone = $this->request->getPost('phone');
 
     // Validate the input
-        if (empty($email)) {
-            return $this->response->setJSON(['success' => false, 'message' => 'Email is required']);
+        if (empty($ID)) {
+            return $this->response->setJSON(['success' => false, 'message' => 'ID is required']);
         }
 
     // Check if email already exists for another user
-        $existingUser = $model->where('email', $email)
+        $existingUser = $model->where('ID', $ID)
         ->where('id !=', $userId)
         ->first();
 
         if ($existingUser) {
             return $this->response->setJSON([
                 'success' => false,
-                'message' => 'Email is already in use by another user.'
+                'message' => 'ID is already in use by another user.'
             ]);
         }
 
         $userData = [
             'name'       => $name,
-            'email'      => $email,
+            'ID'      => $ID,
             'role'       => $role,
             'status'     => $status,
             'phone'      => $phone,

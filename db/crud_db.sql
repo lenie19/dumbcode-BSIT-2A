@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `login_attempts` (
   `id` int(11) NOT NULL,
-  `email` varchar(255) NOT NULL,
+  `ID` varchar(255) NOT NULL,
   `ip_address` varchar(45) NOT NULL,
   `attempt_time` datetime NOT NULL,
   `user_agent` varchar(255) NOT NULL
@@ -39,7 +39,7 @@ CREATE TABLE `login_attempts` (
 -- Dumping data for table `login_attempts`
 --
 
-INSERT INTO `login_attempts` (`id`, `email`, `ip_address`, `attempt_time`, `user_agent`) VALUES
+INSERT INTO `login_attempts` (`id`, `ID`, `ip_address`, `attempt_time`, `user_agent`) VALUES
 (36, 'glennazuelo1@gmail.com', '::142432432', '2025-04-15 13:15:00', '');
 
 -- --------------------------------------------------------
@@ -88,7 +88,7 @@ INSERT INTO `tbl_logs` (`LOGID`, `USERID`, `ACTION`, `DATELOG`, `TIMELOG`, `user
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `uuid` char(36) DEFAULT NULL,
-  `email` varchar(255) NOT NULL,
+  `ID` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `role` varchar(100) DEFAULT 'user',
   `status` varchar(100) DEFAULT NULL,
@@ -103,7 +103,7 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `uuid`, `email`, `password`, `role`, `status`, `name`, `phone`, `created_at`, `updated_at`, `deleted_at`) VALUES
+INSERT INTO `users` (`id`, `uuid`, `ID`, `password`, `role`, `status`, `name`, `phone`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, NULL, 'glennazuelo1@gmail.com', '$2y$10$aitqcz/yYmTPfmMGbMbnXuGEdwNG63RI1qbTF9IM0cg5SrUg4P/iu', 'User', 'Active', 'Glenn Azuelo', '09125110476', '2025-04-17 13:31:01', '2025-07-21 04:18:03', '2025-07-21 04:18:03'),
 (9, NULL, 'glennazuelo1@gmail.comd', '$2y$10$Xv57FAvSxnip8apDXF3rmutrLIESHcAHYVzQMKgMf2tu6GknL4Plm', 'Admin', 'Active', 'Glenn Azuelo', '09125110476', '2025-05-24 07:00:28', '2025-05-23 23:00:28', '2025-05-23 23:00:28'),
 (10, NULL, 'glennazuelo1@gmail.com1', '$2y$10$PxNNhaa76.SAbFFelJU9xOZRajcVMCZkeToZ09l1FR5ll13saXu4q', 'Admin', 'Active', 'Cherry Ann Grandia', '09125110476', '2025-05-24 07:00:50', '2025-07-21 04:19:17', '2025-07-21 04:19:17');
@@ -130,7 +130,7 @@ ALTER TABLE `tbl_logs`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `email` (`email`);
+  ADD UNIQUE KEY `ID` (`ID`);
 
 --
 -- AUTO_INCREMENT for dumped tables
