@@ -39,6 +39,8 @@
                     <th style="display:none;">id</th>
                     <th>Name</th>
                     <th>ID</th>
+                    <th>Address</th>
+                    <th>Bday</th>
                     <th>Role</th>
                     <th>Status</th>
                     <th>Phone</th>
@@ -75,6 +77,14 @@
               <div class="form-group">
                 <label>ID</label>
                 <input type="text" name="ID" class="form-control" required />
+              </div>
+              <div class="form-group">
+                <label>Address</label>
+                <input type="text" name="address" class="form-control" />
+              </div>
+              <div class="form-group">
+                <label>Bday</label>
+                <input type="date" name="bday" class="form-control" />
               </div>
               <div class="form-group">
                 <label>Password</label>
@@ -142,6 +152,16 @@
             <div class="form-group">
               <label for="ID">ID</label>
               <input type="text" class="form-control" id="ID" name="ID" required>
+            </div>
+
+            <div class="form-group">
+              <label for="address">Address</label>
+              <input type="text" class="form-control" id="address" name="address">
+            </div>
+
+            <div class="form-group">
+              <label for="bday">Bday</label>
+              <input type="date" class="form-control" id="bday" name="bday">
             </div>
 
             <div class="form-group">

@@ -94,6 +94,8 @@ CREATE TABLE `users` (
   `status` varchar(100) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
   `phone` varchar(20) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `bday` date DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `deleted_at` timestamp NULL DEFAULT NULL

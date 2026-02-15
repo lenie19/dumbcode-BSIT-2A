@@ -42,6 +42,8 @@ $(document).on('click', '.edit-btn', function () {
             $('#editUserModal #name').val(response.data.name);
             $('#editUserModal #userId').val(response.data.id);
             $('#editUserModal #ID').val(response.data.ID || response.data.email || '');
+            $('#editUserModal #address').val(response.data.address || '');
+            $('#editUserModal #bday').val(response.data.bday || '');
             $('#editUserModal #password').val('');
             $('#editUserModal #role').val(response.data.role);
             $('#editUserModal #status').val(response.data.status);
@@ -133,6 +135,8 @@ $(document).ready(function () {
         { data: 'id', visible: false },
         { data: 'name' },
         { data: 'ID' },
+        { data: 'address' },
+        { data: 'bday' },
         { data: 'role' },
         { data: 'status' },
         { data: 'phone' },

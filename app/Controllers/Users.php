@@ -18,6 +18,8 @@ class Users extends Controller
         $name = $this->request->getPost('name');
         $ID = $this->request->getPost('ID');
         $password = $this->request->getPost('password');
+        $address = $this->request->getPost('address');
+        $bday = $this->request->getPost('bday');
         $role = $this->request->getPost('role');
         $status = $this->request->getPost('status');
         $phone = $this->request->getPost('phone');
@@ -38,6 +40,8 @@ class Users extends Controller
         $data = [
             'name'       => $name,
             'ID'      => $ID,
+            'address'   => $address,
+            'bday'      => $bday,
             'password'   => password_hash($password, PASSWORD_DEFAULT),
             'role'       => $role,
             'status'     => $status,
@@ -61,6 +65,8 @@ class Users extends Controller
         $name = $this->request->getPost('name');
         $ID = $this->request->getPost('ID');
         $password = $this->request->getPost('password');
+        $address = $this->request->getPost('address');
+        $bday = $this->request->getPost('bday');
         $role = $this->request->getPost('role');
         $status = $this->request->getPost('status');
         $phone = $this->request->getPost('phone');
@@ -85,6 +91,8 @@ class Users extends Controller
         $userData = [
             'name'       => $name,
             'ID'      => $ID,
+            'address'   => $address,
+            'bday'      => $bday,
             'role'       => $role,
             'status'     => $status,
             'phone'      => $phone,

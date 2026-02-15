@@ -9,7 +9,7 @@ class UserModel extends Model
     protected $table = 'users';
     protected $primaryKey = 'id';
 
-    protected $allowedFields = ['uuid','ID', 'password','role','status','name','phone', 'created_at', 'updated_at', 'deleted_at'];
+    protected $allowedFields = ['uuid','ID', 'password','role','status','name','phone','address','bday', 'created_at', 'updated_at', 'deleted_at'];
 
     public function getRecords($start, $length, $searchValue = '')
     {
@@ -20,6 +20,7 @@ class UserModel extends Model
             $builder->groupStart()
                 ->like('ID', $searchValue)
                 ->orLike('name', $searchValue)
+                ->orLike('address', $searchValue)
                 ->groupEnd();
         }
 
