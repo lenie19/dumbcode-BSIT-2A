@@ -37,7 +37,7 @@ class Auth extends BaseController
     $db = \Config\Database::connect();
 
     // Sanitize input
-    $ID = filter_var($this->request->getPost('ID'), FILTER_SANITIZE_STRING);
+    $email = filter_var($this->request->getPost('email'), FILTER_SANITIZE_EMAIL);
     $password = trim($this->request->getPost('password'));
     $ip = $this->request->getIPAddress();
     $userAgent = $this->request->getUserAgent();
@@ -70,7 +70,7 @@ class Auth extends BaseController
         }
     }
 
-    $user = $model->where('ID', $ID)->first();
+    $user = $model->where('email', $email)->first();
 
     if ($user && password_verify($password, $user['password'])) {
         // Success: clear only failed attempts for this IP
@@ -79,7 +79,7 @@ class Auth extends BaseController
         $session->regenerate();
         $session->set([
             'user_id' => $user['id'],
-            'ID' => $user['ID'],
+            'email' => $user['email'],
             'name' => $user['name'],
             'logged_in' => true,
             'last_activity' => time()
@@ -90,13 +90,13 @@ class Auth extends BaseController
     } else {
         // Log the failed attempt
         $builder->insert([
-            'ID' => $ID,
+            'email' => $email,
             'ip_address' => $ip,
             'user_agent' => $userAgent,
             'attempt_time' => date('Y-m-d H:i:s')
         ]);
 
-        return redirect()->to('/login')->with('error', 'Invalid ID or password');
+        return redirect()->to('/login')->with('error', 'Invalid email or password');
     }
  }
 
