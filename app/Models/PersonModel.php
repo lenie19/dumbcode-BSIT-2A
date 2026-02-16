@@ -4,12 +4,12 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class UserModel extends Model
+class PersonModel extends Model
 {
-    protected $table = 'users';
+    protected $table = 'person';
     protected $primaryKey = 'id';
 
-    protected $allowedFields = ['uuid','email', 'password','role','status','name','phone', 'created_at', 'updated_at', 'deleted_at'];
+    protected $allowedFields = ['name','bday'];
 
     public function getRecords($start, $length, $searchValue = '')
     {
@@ -18,7 +18,6 @@ class UserModel extends Model
 
         if (!empty($searchValue)) {
             $builder->groupStart()
-                ->like('email', $searchValue)
                 ->orLike('name', $searchValue)
                 ->groupEnd();
         }

@@ -22,7 +22,7 @@
 
         <li class="nav-item">
             <a style="color: #fff;" class="nav-link" href="#">
-                <?= session()->get('ID') ?> 
+                <?= session()->get('email') ?> 
                 <i class="far fa-user-circle" style="color: #fff; margin-left: 5px;"></i>
             </a>
         </li>

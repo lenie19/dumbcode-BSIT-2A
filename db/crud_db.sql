@@ -21,9 +21,6 @@ SET time_zone = "+00:00";
 -- Database: `crud_db`
 --
 
-CREATE DATABASE IF NOT EXISTS `crud_db` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `crud_db`;
-
 -- --------------------------------------------------------
 
 --
