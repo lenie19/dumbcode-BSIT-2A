@@ -74,6 +74,8 @@ class Person extends Controller
     }
 }
 
+
+
 public function delete($id){
     $model = new PersonModel();
     $logModel = new LogModel();
@@ -91,6 +93,7 @@ public function delete($id){
         return $this->response->setJSON(['success' => false, 'message' => 'Failed to delete Person.']);
     }
 }
+
 
 public function fetchRecords()
 {

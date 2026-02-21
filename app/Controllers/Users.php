@@ -123,6 +123,9 @@ class Users extends Controller
     }
 }
 
+
+
+
 public function delete($id){
     $model = new UserModel();
     $logModel = new LogModel();
