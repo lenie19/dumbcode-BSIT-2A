@@ -9,7 +9,12 @@ use App\Models\LogModel;
 
 class Profiling extends Controller
 {
-    
+    public function index(){
+        $model = new ProfilingModel();
+        $data['profiling'] = $model->findAll();
+        return view('profiling/index', $data);
+    }
+
     public function save(){
         $name = $this->request->getPost('name');
         $bday = $this->request->getPost('bday');
@@ -89,4 +94,33 @@ public function delete($id){
     } else {
         return $this->response->setJSON(['success' => false, 'message' => 'Failed to delete Profiling.']);
     }
+}
+
+public function fetchRecords()
+{
+    $request = service('request');
+    $model = new \App\Models\ProfilingModel();
+
+    $start = $request->getPost('start') ?? 0;
+    $length = $request->getPost('length') ?? 10;
+    $searchValue = $request->getPost('search')['value'] ?? '';
+
+    $totalRecords = $model->countAll();
+    $result = $model->getRecords($start, $length, $searchValue);
+
+    $data = [];
+    $counter = $start + 1;
+    foreach ($result['data'] as $row) {
+        $row['row_number'] = $counter++;
+        $data[] = $row;
+    }
+
+    return $this->response->setJSON([
+        'draw' => intval($request->getPost('draw')),
+        'recordsTotal' => $totalRecords,
+        'recordsFiltered' => $result['filtered'],
+        'data' => $data,
+    ]);
+}
+
 }
