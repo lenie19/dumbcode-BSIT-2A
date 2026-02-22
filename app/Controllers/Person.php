@@ -74,6 +74,11 @@ class Person extends Controller
     }
 }
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> e872e207e7e92a14367b9c1d022dbfa940b4eb55
 public function delete($id){
     $model = new PersonModel();
     $logModel = new LogModel();
@@ -92,6 +97,10 @@ public function delete($id){
     }
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> e872e207e7e92a14367b9c1d022dbfa940b4eb55
 public function fetchRecords()
 {
     $request = service('request');

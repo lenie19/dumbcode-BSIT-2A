@@ -108,6 +108,26 @@ INSERT INTO `users` (`id`, `uuid`, `email`, `password`, `role`, `status`, `name`
 (9, NULL, 'glennazuelo1@gmail.comd', '$2y$10$Xv57FAvSxnip8apDXF3rmutrLIESHcAHYVzQMKgMf2tu6GknL4Plm', 'Admin', 'Active', 'Glenn Azuelo', '09125110476', '2025-05-24 07:00:28', '2025-05-23 23:00:28', '2025-05-23 23:00:28'),
 (10, NULL, 'glennazuelo1@gmail.com1', '$2y$10$PxNNhaa76.SAbFFelJU9xOZRajcVMCZkeToZ09l1FR5ll13saXu4q', 'Admin', 'Active', 'Cherry Ann Grandia', '09125110476', '2025-05-24 07:00:50', '2025-07-21 04:19:17', '2025-07-21 04:19:17');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `person`
+--
+
+CREATE TABLE `person` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `bday` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `person`
+--
+
+INSERT INTO `person` (`id`, `name`, `bday`) VALUES
+(1, 'John Doe', '1990-05-15'),
+(2, 'Jane Smith', '1992-08-22');
+
 --
 -- Indexes for dumped tables
 --
@@ -124,6 +144,12 @@ ALTER TABLE `login_attempts`
 ALTER TABLE `tbl_logs`
   ADD PRIMARY KEY (`LOGID`),
   ADD KEY `USERID` (`USERID`);
+
+--
+-- Indexes for table `person`
+--
+ALTER TABLE `person`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `users`
@@ -147,6 +173,12 @@ ALTER TABLE `login_attempts`
 --
 ALTER TABLE `tbl_logs`
   MODIFY `LOGID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `person`
+--
+ALTER TABLE `person`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`

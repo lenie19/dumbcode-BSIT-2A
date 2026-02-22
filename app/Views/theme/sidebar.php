@@ -99,6 +99,7 @@ body.dark-mode .main-sidebar .nav-link:hover {
         <p>Person</p>
       </a>
     </li>
+<<<<<<< HEAD
     <li class="nav-item">
       <a href="<?= base_url('profiling') ?>" class="nav-link <?= is_active(1, 'profiling') ?>">
         <i class="nav-icon fas fa-users"></i>
@@ -111,6 +112,8 @@ body.dark-mode .main-sidebar .nav-link:hover {
         <p>Student</p>
       </a>
     </li>
+=======
+>>>>>>> e872e207e7e92a14367b9c1d022dbfa940b4eb55
      <li class="nav-item">
       <a href="<?= base_url('users') ?>" class="nav-link <?= is_active(1, 'users') ?>">
         <i class="nav-icon fas fa-user-lock"></i>

@@ -108,6 +108,10 @@ $(document).on('click', '.deleteUserBtn', function () {
     }
 });
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> e872e207e7e92a14367b9c1d022dbfa940b4eb55
 $(document).ready(function () {
     const $table = $('#example1');
 

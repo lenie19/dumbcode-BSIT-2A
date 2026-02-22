@@ -112,6 +112,7 @@ $(document).on('click', '.deleteUserBtn', function () {
     }
 });
 
+
 $(document).ready(function () {
     const $table = $('#example1');
 

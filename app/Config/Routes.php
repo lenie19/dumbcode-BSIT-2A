@@ -17,8 +17,16 @@ $routes->get('/users', 'Users::index');
 $routes->post('users/save', 'Users::save');
 $routes->get('users/edit/(:segment)', 'Users::edit/$1');
 $routes->post('users/update', 'Users::update');
-$routes->delete('users/delete/(:num)', 'Users::delete/$1');
 $routes->post('users/fetchRecords', 'Users::fetchRecords');
+$routes->delete('users/delete/(:num)', 'Users::delete/$1');
+
+// Person routes
+$routes->get('/person', 'Person::index');
+$routes->post('person/save', 'Person::save');
+$routes->get('person/edit/(:segment)', 'Person::edit/$1');
+$routes->post('person/update', 'Person::update');
+$routes->post('person/fetchRecords', 'Person::fetchRecords');
+$routes->delete('person/delete/(:num)', 'Person::delete/$1');
 
 // Person routes
 $routes->get('/person', 'Person::index');
