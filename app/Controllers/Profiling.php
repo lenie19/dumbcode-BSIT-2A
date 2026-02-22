@@ -10,6 +10,27 @@ use App\Models\LogModel;
 class Profiling extends Controller
 {
     
+    public function save(){
+        $name = $this->request->getPost('name');
+        $bday = $this->request->getPost('bday');
+        $address = $this->request->getPost('address');
+
+        $userModel = new \App\Models\ProfilingModel();
+        $logModel = new LogModel();
+
+        $data = [
+            'name'       => $name,
+            'bday'       => $bday,
+            'address'    => $address
+        ];
+
+        if ($userModel->insert($data)) {
+            $logModel->addLog('New Profiling has been added: ' . $name, 'ADD');
+            return $this->response->setJSON(['status' => 'success']);
+        } else {
+            return $this->response->setJSON(['status' => 'error', 'message' => 'Failed to save Profiling']);
+        }
+    }
 
     public function update(){
         $model = new ProfilingModel();

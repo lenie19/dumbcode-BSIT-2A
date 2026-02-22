@@ -10,6 +10,26 @@ use App\Models\PersonModel;
 class Person extends Controller
 {
 
+    public function save(){
+        $name = $this->request->getPost('name');
+        $bday = $this->request->getPost('bday');
+
+        $userModel = new \App\Models\PersonModel();
+        $logModel = new LogModel();
+
+        $data = [
+            'name'       => $name,
+            'bday'      => $bday
+        ];
+
+        if ($userModel->insert($data)) {
+            $logModel->addLog('New Person has been added: ' . $name, 'ADD');
+            return $this->response->setJSON(['status' => 'success']);
+        } else {
+            return $this->response->setJSON(['status' => 'error', 'message' => 'Failed to save person']);
+        }
+    }
+
     public function update(){
         $model = new UserModel();
         $logModel = new LogModel();
@@ -66,3 +86,4 @@ public function delete($id){
         return $this->response->setJSON(['success' => false, 'message' => 'Failed to delete Person.']);
     }
 }
+

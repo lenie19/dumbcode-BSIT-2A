@@ -8,7 +8,47 @@ use App\Models\LogModel;
 
 class Users extends Controller
 {
-   
+  
+
+    public function save(){
+        $name = $this->request->getPost('name');
+        $email = $this->request->getPost('email');
+        $password = $this->request->getPost('password');
+        $role = $this->request->getPost('role');
+        $status = $this->request->getPost('status');
+        $phone = $this->request->getPost('phone');
+
+        if (!$email || !$password) {
+            return $this->response->setJSON(['status' => 'error', 'message' => 'Email and password are required']);
+        }
+
+        $userModel = new \App\Models\UserModel();
+        $logModel = new LogModel();
+
+        // Check if email already exists
+        $existingUser = $userModel->where('email', $email)->first();
+        if ($existingUser) {
+            return $this->response->setJSON(['status' => 'error', 'message' => 'Email is already in use']);
+        }
+
+        $data = [
+            'name'       => $name,
+            'email'      => $email,
+            'password'   => password_hash($password, PASSWORD_DEFAULT),
+            'role'       => $role,
+            'status'     => $status,
+            'phone'      => $phone,
+            'updated_at' => date('Y-m-d H:i:s'),
+            'deleted_at' => date('Y-m-d H:i:s')
+        ];
+
+        if ($userModel->insert($data)) {
+            $logModel->addLog('New User has been added: ' . $name, 'ADD');
+            return $this->response->setJSON(['status' => 'success']);
+        } else {
+            return $this->response->setJSON(['status' => 'error', 'message' => 'Failed to save user']);
+        }
+    }
 
     public function update(){
         $model = new UserModel();
@@ -98,4 +138,6 @@ public function delete($id){
     } else {
         return $this->response->setJSON(['success' => false, 'message' => 'Failed to delete user.']);
     }
+}
+
 }
