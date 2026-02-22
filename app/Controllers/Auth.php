@@ -108,3 +108,21 @@ class Auth extends BaseController
         session()->destroy();
         return redirect()->to('/login');
     }
+
+    // Method to clear failed login attempts once lockout period expires
+    private function clearFailedAttempts()
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('login_attempts');
+
+        $ip = $this->request->getIPAddress();
+
+        // Delete records based on the IP address and older than the lockout period
+        $timeThreshold = date('Y-m-d H:i:s', strtotime('-1 minute')); // 1 minute ago
+
+        // Delete only records older than the threshold for this IP address
+        $builder->where('ip_address', $ip)
+                ->where('attempt_time <', $timeThreshold)
+                ->delete();
+    }
+}
