@@ -125,4 +125,4 @@ class Auth extends BaseController
                 ->where('attempt_time <', $timeThreshold)
                 ->delete();
     }
-}
+
