@@ -9,6 +9,11 @@ use App\Models\LogModel;
 class Users extends Controller
 {
   
+ public function index(){
+        $model = new UserModel();
+        $data['users'] = $model->findAll();
+        return view('users/index', $data);
+    }
 
     public function save(){
         $name = $this->request->getPost('name');
@@ -140,4 +145,33 @@ public function delete($id){
     }
 }
 
+
+public function fetchRecords()
+{
+    $request = service('request');
+    $model = new \App\Models\UserModel();
+
+    $start = $request->getPost('start') ?? 0;
+    $length = $request->getPost('length') ?? 10;
+    $searchValue = $request->getPost('search')['value'] ?? '';
+
+    $totalRecords = $model->countAll();
+    $result = $model->getRecords($start, $length, $searchValue);
+
+    $data = [];
+    $counter = $start + 1;
+    foreach ($result['data'] as $row) {
+        $row['row_number'] = $counter++;
+        $data[] = $row;
+    }
+
+    return $this->response->setJSON([
+        'draw' => intval($request->getPost('draw')),
+        'recordsTotal' => $totalRecords,
+        'recordsFiltered' => $result['filtered'],
+        'data' => $data,
+    ]);
 }
+
+}
+
