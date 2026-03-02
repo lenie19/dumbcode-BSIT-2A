@@ -10,18 +10,39 @@ class Auth extends BaseController
 {
     public function index()
     {
-        if (session()->get('logged_in')) {
+        helper('cookie');
+        // auto-login from remember me cookie if present
+        $session = session();
+        $remember = get_cookie('remember_me');
+        if (!$session->get('logged_in') && $remember) {
+            $model = new UserModel();
+            $user = $model->find($remember);
+            if ($user) {
+                // restore session
+                $session->regenerate();
+                $session->set([
+                    'user_id' => $user['id'],
+                    'email'   => $user['email'],
+                    'name'    => $user['name'],
+                    'logged_in' => true,
+                    'last_activity' => time(),
+                ]);
+                return redirect()->to('/dashboard');
+            }
+        }
+
+        if ($session->get('logged_in')) {
             return redirect()->to('/dashboard');
         }
 
         // Check if lockout expiry is active
         $lockout = 0;
-        $expiry = session()->get('lockout_expiry');
+        $expiry = $session->get('lockout_expiry');
 
         if ($expiry && time() < $expiry) {
             $lockout = $expiry - time();
         } else {
-            session()->remove('lockout_expiry');
+            $session->remove('lockout_expiry');
 
             // Once the lockout time is over, delete failed login attempts based on IP
             $this->clearFailedAttempts();
@@ -84,6 +105,13 @@ class Auth extends BaseController
             'logged_in' => true,
             'last_activity' => time()
         ]);
+
+        // Remember-me cookie for 30 days
+        if ($this->request->getPost('remember')) {
+            helper('cookie');
+            set_cookie('remember_me', $user['id'], 30 * 24 * 60 * 60);
+        }
+
          $logModel = new LogModel();
          $logModel->addLog('Login: ' .$user['name'], 'LOGIN');
         return redirect()->to('/dashboard');
@@ -104,6 +132,10 @@ class Auth extends BaseController
     {
          $logModel = new LogModel();
          $logModel->addLog('Logout', 'LOGOUT');
+
+        // remove remember cookie
+        helper('cookie');
+        delete_cookie('remember_me');
 
         session()->destroy();
         return redirect()->to('/login');

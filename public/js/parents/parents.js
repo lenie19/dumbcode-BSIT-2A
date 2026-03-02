@@ -6,23 +6,23 @@ function showToast(type, message) {
     }
 }
 
-$('#addUserForm').on('submit', function (e) {
+$('#addParentForm').on('submit', function (e) {
     e.preventDefault();
     $.ajax({
-        url: baseUrl + 'profiling/save',
+        url: baseUrl + 'parents/save',
         method: 'POST',
         data: $(this).serialize(),
         dataType: 'json',
         success: function (response) {
             if (response.status === 'success') {
                 $('#AddNewModal').modal('hide');
-                $('#addUserForm')[0].reset();
-                showToast('success', 'profiling added successfully!');
+                $('#addParentForm')[0].reset();
+                showToast('success', 'Parent added successfully!');
                 setTimeout(() => {
                     location.reload();
                 }, 1000); 
             } else {
-                showToast('error', response.message || 'Failed to add profiling.');
+                showToast('error', response.message || 'Failed to add parent.');
             }
         },
         error: function () {
@@ -32,42 +32,41 @@ $('#addUserForm').on('submit', function (e) {
 });
 
 $(document).on('click', '.edit-btn', function () {
-   const userId = $(this).data('id'); 
+   const id = $(this).data('id'); 
    $.ajax({
-    url: baseUrl + 'profiling/edit/' + userId,
+    url: baseUrl + 'parents/edit/' + id,
     method: 'GET',
     dataType: 'json',
     success: function (response) {
         if (response.data) {
-            $('#editUserModal #name').val(response.data.name);
-            $('#editUserModal #userId').val(response.data.id);
-            $('#editUserModal #bday').val(response.data.bday);
-            $('#editUserModal #address').val(response.data.address);
-            $('#editUserModal').modal('show');
+            $('#editParentModal #name').val(response.data.name);
+            $('#editParentModal #parentId').val(response.data.id);
+            $('#editParentModal #gender').val(response.data.gender);
+            $('#editParentModal #address').val(response.data.address);
+            $('#editParentModal').modal('show');
         } else {
-            alert('Error fetching profiling data');
+            alert('Error fetching parent data');
         }
     },
     error: function () {
-        alert('Error fetching profiling data');
+        alert('Error fetching parent data');
     }
 });
 });
 
-
 $(document).ready(function () {
-    $('#editUserForm').on('submit', function (e) {
+    $('#editParentForm').on('submit', function (e) {
         e.preventDefault(); 
 
         $.ajax({
-            url: baseUrl + 'profiling/update',
+            url: baseUrl + 'parents/update',
             method: 'POST',
             data: $(this).serialize(),
             dataType: 'json',
             success: function (response) {
                 if (response.success) {
-                    $('#editUserModal').modal('hide');
-                    showToast('success', 'profiling Updated successfully!');
+                    $('#editParentModal').modal('hide');
+                    showToast('success', 'Parent Updated successfully!');
                     setTimeout(() => location.reload(), 1000);
                 } else {
                     alert('Error updating: ' + (response.message || 'Unknown error'));
@@ -82,21 +81,18 @@ $(document).ready(function () {
 });
 
 $(document).on('click', '.deleteUserBtn', function () {
-    const userId = $(this).data('id');
-    const csrfName = $('meta[name="csrf-name"]').attr('content');
-    const csrfToken = $('meta[name="csrf-token"]').attr('content');
+    const id = $(this).data('id');
 
-    if (confirm('Are you sure you want to delete this profiling?')) {
+    if (confirm('Are you sure you want to delete this parent?')) {
         $.ajax({
-            url: baseUrl + 'profiling/delete/' + userId,
+            url: baseUrl + 'parents/delete/' + id,
             method: 'POST', 
             data: {
-                _method: 'DELETE',
-                [csrfName]: csrfToken
+                _method: 'DELETE'
             },
             success: function (response) {
                 if (response.success) {
-                    showToast('success', 'Profiling deleted successfully.');
+                    showToast('success', 'Parent deleted successfully.');
                     setTimeout(() => location.reload(), 1000);
                 } else {
                     alert(response.message || 'Failed to delete.');
@@ -119,7 +115,7 @@ $(document).ready(function () {
         processing: true,
         serverSide: true,
         ajax: {
-            url: baseUrl + 'profiling/fetchRecords',
+            url: baseUrl + 'parents/fetchRecords',
             type: 'POST',
             headers: {
                 'X-CSRF-TOKEN': csrfToken
@@ -129,7 +125,7 @@ $(document).ready(function () {
         { data: 'row_number' },
         { data: 'id', visible: false },
         { data: 'name' },
-        { data: 'bday' },
+        { data: 'gender' },
         { data: 'address' },
         {
             data: null,

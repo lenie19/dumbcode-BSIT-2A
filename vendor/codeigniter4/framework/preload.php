@@ -54,7 +54,8 @@ class preload
                 '/system/Config/Routes.php',
                 '/system/Language/',
                 '/system/bootstrap.php',
-                '/system/rewrite.php',
+                // '/system/rewrite.php', // no longer part of framework
+
                 '/Views/',
                 // Errors occur.
                 '/system/ThirdParty/',

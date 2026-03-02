@@ -6,12 +6,12 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1 class="m-0">User Accounts</h1>
+          <h1 class="m-0">Parents</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">Dashboard v1</li>
+            <li class="breadcrumb-item active">Parents</li>
           </ol>
         </div>
       </div>
@@ -24,7 +24,7 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">List of User Accounts</h3>
+              <h3 class="card-title">List of Parents</h3>
               <div class="float-right">
                 <button type="button" class="btn btn-md btn-primary" data-toggle="modal" data-target="#AddNewModal">
                   <i class="fa fa-plus-circle fa fw"></i> Add New
@@ -38,7 +38,7 @@
                     <th>No.</th>
                     <th style="display:none;">id</th>
                     <th>Name</th>
-                    <th>Birthday</th>
+                    <th>Gender</th>
                     <th>Address</th>
                     <th>Actions</th>
                   </tr>
@@ -52,10 +52,10 @@
       </div>
     </div>
 
-    <!-- ✅ Add New Modal -->
+    <!-- Add New Modal -->
     <div class="modal fade" id="AddNewModal" tabindex="-1" role="dialog" aria-labelledby="AddNewModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
-        <form id="addUserForm">
+        <form id="addParentForm">
           <?= csrf_field() ?>
           <div class="modal-content">
             <div class="modal-header">
@@ -70,13 +70,17 @@
               </div>
 
               <div class="form-group">
-                <label>Birthday</label>
-                <input type="date" name="bday" class="form-control" required />
+                <label>Gender</label>
+                <select name="gender" class="form-control">
+                  <option value="">-- Select --</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                </select>
               </div>
 
               <div class="form-group">
                 <label>Address</label>
-                <input type="text" name="address" class="form-control" required />
+                <textarea name="address" class="form-control"></textarea>
               </div>
           </div>
 
@@ -89,35 +93,39 @@
     </div>
   </div>
 
-  <div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="editUserModalLabel" aria-hidden="true">
+  <div class="modal fade" id="editParentModal" tabindex="-1" role="dialog" aria-labelledby="editParentModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="editUserModalLabel"><i class="far fa-edit fa fw"></i> Edit Record</h5>
+          <h5 class="modal-title" id="editParentModalLabel"><i class="far fa-edit fa fw"></i> Edit Record</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form id="editUserForm">
+        <form id="editParentForm">
            <?= csrf_field() ?>
           <div class="modal-body">
 
-            <input type="hidden" id="userId" name="id">
+            <input type="hidden" id="parentId" name="id">
 
              <div class="form-group">
                 <label>Name</label>
                 <input type="text" name="name" id="name" class="form-control" required />
               </div>
 
-            <div class="form-group">
-              <label for="email">Birtday</label>
-              <input type="date" class="form-control" id="bday" name="bday" required>
-            </div>
+              <div class="form-group">
+                <label>Gender</label>
+                <select name="gender" id="gender" class="form-control">
+                  <option value="">-- Select --</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                </select>
+              </div>
 
-            <div class="form-group">
-              <label for="password">Address</label>
-              <input type="text" class="form-control" id="address" name="address">
-            </div>  
+              <div class="form-group">
+                <label>Address</label>
+                <textarea name="address" id="address" class="form-control"></textarea>
+              </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class='fas fa-times-circle'></i> Cancel</button>
@@ -135,5 +143,5 @@
 
 <?= $this->section('scripts') ?>
 <script> const baseUrl = "<?= base_url() ?>"; </script>
-<script src="<?= base_url('js/profiling/profiling.js') ?>"></script>
+<script src="<?= base_url('js/parents/parents.js') ?>"></script>
 <?= $this->endSection() ?>

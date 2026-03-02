@@ -38,6 +38,9 @@
         "sort-packages": true
     },
     "scripts": {
-        "test": "phpunit"
+        "test": "phpunit",
+        "post-install-cmd": [
+            "php -r \"if (!file_exists('vendor/codeigniter4/framework/system/rewrite.php')) { file_put_contents('vendor/codeigniter4/framework/system/rewrite.php', '<?php\\n// stub to satisfy legacy includes\\n'); }\""        
+        ]
     }
 }

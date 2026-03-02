@@ -36,21 +36,14 @@ $routes->post('person/update', 'Person::update');
 $routes->delete('person/delete/(:num)', 'Person::delete/$1');
 $routes->post('person/fetchRecords', 'Person::fetchRecords');
 
-// Profiling routes
-$routes->get('/profiling', 'Profiling::index');
-$routes->post('profiling/save', 'Profiling::save');
-$routes->get('profiling/edit/(:segment)', 'Profiling::edit/$1');
-$routes->post('profiling/update', 'Profiling::update');
-$routes->delete('profiling/delete/(:num)', 'Profiling::delete/$1');
-$routes->post('profiling/fetchRecords', 'Profiling::fetchRecords');
 
-// Student routes
-$routes->get('/student', 'Student::index');
-$routes->post('student/save', 'Student::save');
-$routes->get('student/edit/(:segment)', 'Student::edit/$1');
-$routes->post('student/update', 'Student::update');
-$routes->delete('student/delete/(:num)', 'Student::delete/$1');
-$routes->post('student/fetchRecords', 'Student::fetchRecords');
+// Parent routes (use plural controller)
+$routes->get('/parent', 'Parents::index');
+$routes->post('parent/save', 'Parents::save');
+$routes->get('parent/edit/(:segment)', 'Parents::edit/$1');
+$routes->post('parent/update', 'Parents::update');
+$routes->delete('parent/delete/(:num)', 'Parents::delete/$1');
+$routes->post('parent/fetchRecords', 'Parents::fetchRecords');
 
 // Logs routes for admin
 $routes->get('/log', 'Logs::log');

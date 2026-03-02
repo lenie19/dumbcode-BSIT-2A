@@ -104,11 +104,12 @@ class Serve extends BaseCommand
 
         // Mimic Apache's mod_rewrite functionality with user settings.
         $rewrite = escapeshellarg(SYSTEMPATH . 'rewrite.php');
+        $rewriteSwitch = is_file(SYSTEMPATH . 'rewrite.php') ? ' ' . $rewrite : '';
 
         // Call PHP's built-in webserver, making sure to set our
         // base path to the public folder, and to use the rewrite file
         // to ensure our environment is set and it simulates basic mod_rewrite.
-        passthru($php . ' -S ' . $host . ':' . $port . ' -t ' . $docroot . ' ' . $rewrite, $status);
+        passthru($php . ' -S ' . $host . ':' . $port . ' -t ' . $docroot . $rewriteSwitch, $status);
 
         if ($status !== EXIT_SUCCESS && $this->portOffset < $this->tries) {
             $this->portOffset++;

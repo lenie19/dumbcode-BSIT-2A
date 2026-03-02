@@ -4,12 +4,12 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class ProfilingModel extends Model
+class ParentModel extends Model
 {
-    protected $table = 'profiling';
+    protected $table = 'parents';
     protected $primaryKey = 'id';
 
-    protected $allowedFields = ['name','bday', 'address'];
+    protected $allowedFields = ['name','gender','address'];
 
     public function getRecords($start, $length, $searchValue = '')
     {
@@ -22,7 +22,6 @@ class ProfilingModel extends Model
                 ->groupEnd();
         }
 
-        // Clone builder for filtered count before applying limit
         $filteredBuilder = clone $builder;
         $filteredRecords = $filteredBuilder->countAllResults();
 
