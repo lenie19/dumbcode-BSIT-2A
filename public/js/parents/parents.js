@@ -9,7 +9,7 @@ function showToast(type, message) {
 $('#addParentForm').on('submit', function (e) {
     e.preventDefault();
     $.ajax({
-        url: baseUrl + 'parents/save',
+        url: baseUrl + 'parent/save',
         method: 'POST',
         data: $(this).serialize(),
         dataType: 'json',
@@ -34,7 +34,7 @@ $('#addParentForm').on('submit', function (e) {
 $(document).on('click', '.edit-btn', function () {
    const id = $(this).data('id'); 
    $.ajax({
-    url: baseUrl + 'parents/edit/' + id,
+    url: baseUrl + 'parent/edit/' + id,
     method: 'GET',
     dataType: 'json',
     success: function (response) {
@@ -59,7 +59,7 @@ $(document).ready(function () {
         e.preventDefault(); 
 
         $.ajax({
-            url: baseUrl + 'parents/update',
+            url: baseUrl + 'parent/update',
             method: 'POST',
             data: $(this).serialize(),
             dataType: 'json',
@@ -85,7 +85,7 @@ $(document).on('click', '.deleteUserBtn', function () {
 
     if (confirm('Are you sure you want to delete this parent?')) {
         $.ajax({
-            url: baseUrl + 'parents/delete/' + id,
+            url: baseUrl + 'parent/delete/' + id,
             method: 'POST', 
             data: {
                 _method: 'DELETE'
@@ -115,7 +115,7 @@ $(document).ready(function () {
         processing: true,
         serverSide: true,
         ajax: {
-            url: baseUrl + 'parents/fetchRecords',
+            url: baseUrl + 'parent/fetchRecords',
             type: 'POST',
             headers: {
                 'X-CSRF-TOKEN': csrfToken

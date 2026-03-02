@@ -8,6 +8,9 @@ class ParentModel extends Model
 {
     protected $table = 'parents';
     protected $primaryKey = 'id';
+    protected $useTimestamps = true;
+    protected $createdField = 'created_at';
+    protected $updatedField = 'updated_at';
 
     protected $allowedFields = ['name','gender','address'];
 
